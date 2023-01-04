@@ -52,7 +52,7 @@ return packer.startup(function(use)
   use { "nvim-lualine/lualine.nvim", commit = "a52f078026b27694d2290e34efa61a6e4a690621" }
   use { "akinsho/toggleterm.nvim", commit = "2a787c426ef00cb3488c11b14f5dcf892bbd0bda" }
   use { "ahmedkhalf/project.nvim", commit = "628de7e433dd503e782831fe150bb750e56e55d6" }
-  use { "lewis6991/impatient.nvim", commit = "b842e16ecc1a700f62adb9802f8355b99b52a5a6" }
+  use { "lewis6991/impatient.nvim", commit = "c90e273f7b8c50a02f956c24ce4804a47f18162e"}
   use { "lukas-reineke/indent-blankline.nvim", commit = "db7cbcb40cc00fc5d6074d7569fb37197705e7f6" }
   use { "goolord/alpha-nvim", commit = "0bb6fc0646bcd1cdb4639737a1cee8d6e08bcc31" }
 	use {"folke/which-key.nvim"}
@@ -106,10 +106,24 @@ return packer.startup(function(use)
   use { "rcarriga/nvim-dap-ui", commit = "54365d2eb4cb9cfab0371306c6a76c913c5a67e3" }
 
   -- distant.nvim
-  use {"chipsenkbeil/distant.nvim", commit = "887fc16bdae59bd1865e0776b427ca521987f7fe"}
-
+  use {
+    'chipsenkbeil/distant.nvim',
+    branch = "v0.2",
+    commit = "d6e29ad8d877674f4c4b619b0275961081bc33f2",
+    config = function()
+      require('distant').setup {
+        -- Applies Chip's personal settings to every machine you connect to
+        --
+        -- 1. Ensures that distant servers terminate with no connections
+        -- 2. Provides navigation bindings for remote directories
+        -- 3. Provides keybinding to jump into a remote file's parent directory
+        ['*'] = require('distant.settings').chip_default()
+      }
+    end
+  }
+  
   -- neorg
-  use {"nvim-neorg/neorg", commit = "9fd5c918911fceffd0b1cec71b568b5b438d4ec7"}
+  use {"nvim-neorg/neorg", run = ":Neorg sync-parsers", commit = "9fd5c918911fceffd0b1cec71b568b5b438d4ec7"}
 
   -- Nvim-R
   use {"jalvesaq/Nvim-R", commit = "de4415d38f55787802655a59b8e7e607f8af719f"}

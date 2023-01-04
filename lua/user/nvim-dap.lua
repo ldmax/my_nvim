@@ -25,3 +25,12 @@ dap.configurations.python = {
     pythonPath = python_exe
   },
 }
+
+
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+keymap('n', '<space>dtb', '<cmd>DapToggleBreakpoint<cr>', opts)
+keymap('n', '<space>dc', '<cmd>DapContinue<cr>', opts)
+keymap('n', '<space>dsi', '<cmd>DapStepInto<cr>', opts)
+keymap('n', '<space>dr', '<cmd>DapStepOver<cr>', opts)
+keymap('n', '<space>dt', '<cmd>DapStepOut<cr>', opts)
